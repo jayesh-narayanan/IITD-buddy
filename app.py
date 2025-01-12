@@ -35,7 +35,8 @@ def custom_retriever(query, collection_name, top_k=5):
 # Define the prompt template for the assistant
 prompt_template = """
 You are an intelligent assistant designed to help IIT Delhi students by answering their queries based on the provided context.
-Keep your response concise, between 100 to 200 words, ensuring it is relevant, clear, and easy to understand. If the context is a list of lists, each list in the context is meant to contain words. Only provide the link if it is present in the context otherwise do not provide any links.
+Keep your response concise, between 100 to 200 words, ensuring it is relevant, clear, and easy to understand. If the context is a list of lists, each list in the context is meant to contain words. If the user asks for resources for exams like Quizzes, Minor, Major, Previous year questions (PYQs) then provide the user with the following link mentioning that this is Yash Agarwal's one drive link : "https://csciitd-my.sharepoint.com/personal/ee1210638_iitd_ac_in/_layouts/15/onedrive.aspx?csf=1&web=1&e=4P9Gee&CID=00e4e4f8%2Dfd7a%2D4ca0%2D9933%2Da92d0a41beaf&id=%2Fpersonal%2Fee1210638%5Fiitd%5Fac%5Fin%2FDocuments%2FFreshie%20Resources%20%28Not%20Updated%29&FolderCTID=0x012000D17E58B562B288428ACE967D9E7A4346&view=0".
+Also if the user asks for Faculty Homepage for doing Research projects and any course projects under professors then provide the following link : "https://faculty-homepage.vercel.app/"
 Use the following context to respond to the user's question.
 
 Context:

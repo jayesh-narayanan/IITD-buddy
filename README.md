@@ -8,15 +8,12 @@ Design an intelligent assistant to:
 1)Provide academic and mentorship guidance.
 2)Offer information on hostel facilities, campus events, and local hotspots.
 
-Methodology
+Methodology:
 Data Collection
 Gather data from reliable sources such as:
-Courses of Study documents.
-The BSW Website.
-Professors’ web pages.
-Inception(fresher's magazine)
+Courses of Study documents, The BSW Website, Professors’ web pages, Inception(fresher's magazine).
 
-AI Integration
+AI Integration:
 We have used LLM APIs like Groq for generating intelligent responses.
 We have built a vector database with Qdrant for efficient context retrieval.
 
@@ -25,16 +22,16 @@ Cloud setup on Qdrant.
 Make a vector database in Qdrant.
 Use the RAG (Retrieve and Generate) approach to retreive the top 5 most relevant chunks of text.
 Pass the context to the LLM to generate concise and relevant answers.
-Display the output of the llm to the user on the app
-
+Display the output of the llm to the user on the app.
 Implement a user-friendly interface using Streamlit.
-Features
+
+Features:
 Academics: Provide guidance on courses, degree requirements, and workload balancing.
 Mentorship: Assist students with mentorship opportunities and career planning.
 Campus Navigation: Offer directions to departments, hostels, and local hotspots.
 Event Updates: Notify students about campus events and activities.
 
-Tools and Technologies
+Tools and Technologies:
 LLM APIs: Groq / Gemini for intelligent text generation.
 Vector Database: Qdrant for efficient data storage and retrieval.
 Frontend Framework: Streamlit for building an interactive user interface.

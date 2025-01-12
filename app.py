@@ -1,42 +1,79 @@
+from qdrant_client import models, QdrantCllient
+from collections import Counter
 import streamlit as st
-import openai  # Replace with your model's API library if different
+from langchain_groq import ChatGroq
+import os
+from langchain_core.prompts import ChatPromptTemplate
+from langchain_core.runnables import RunnablePassthrough
+from langchain_core.output_parsers import StrOutputParser
+from sentence_transformers import SentenceTransformer
 
-# Set up OpenAI API key (replace with your API key or setup logic)
-openai.api_key = "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"
+llm = ChatGroq(api_key=os.getenv(st.secrets["groq_api_key"]), model="llama-3.1-8b-instant")
 
-# Streamlit app
-st.title("IITD_buddy")
+client=QdrantCllient(url=st.secrets["Qdrant_url"],api_key=st.secrets["Qdrant_api_key"])
 
-st.sidebar.header("Instructions")
-st.sidebar.write("""
-1. Enter your question in the text box below.
-2. Click 'Generate Response' to see the answer from the AI model.
-3. Adjust settings as needed in the sidebar.
-""")
+encoder = SentenceTransformer("all-MiniLM-L6-v2")
 
-# User input
-question = st.text_input("Ask your question:", placeholder="Type your question here...")
-temperature = st.sidebar.slider("Response Creativity (Temperature)", 0.0, 1.0, 0.7)
-max_tokens = st.sidebar.slider("Max Tokens", 50, 300, 150)
 
-# Generate response
-if st.button("Generate Response"):
-    if question.strip():
+def custom_retriever(query, collection_name="my_books", top_k=5):
+    """
+    Custom retriever for Qdrant.
+    
+    Args:
+        query_vector (list[float]): The vector representation of the query.
+        collection_name (str): The name of the Qdrant collection.
+        top_k (int): Number of top results to retrieve.
+    
+    Returns:
+        list[dict]: A list of retrieved documents with their scores.
+    """
+    # search_results = client.search(
+    #     collection_name=collection_name,
+    #     query_vector=query_vector,
+    #     limit=top_k
+    # )
+    # # Extract the context from the results
+    # context = [result.payload for result in search_results]
+    hits = client.query_points(
+        collection_name=collection_name,
+        query_vector=encoder.encode(query).tolist(),
+        limit=3,
+    ).points
+
+    context = [result.payload for hit in hits]
+
+prompt_template = """
+You are an intelligent assistant tasked with answering user queries based on provided context. 
+Use the following context to respond to the user's question.
+
+Context:
+{context}
+
+Question:
+{query}
+
+Answer:
+"""
+prompt = ChatPromptTemplate.from_template(prompt_template)
+
+chain = (
+    {"context": custom_retriever, "query": RunnablePassthrough()}
+    | prompt
+    | llm
+    | StrOutputParser()
+)
+
+st.title("Interactive Chatbot with Qdrant and Groq")
+st.write("Ask any question, and the chatbot will respond using context from the vector database!")
+
+user_query = st.text_input("Enter your question here:", value="What qualities did Phileas Fogg display during his journey?")
+
+if st.button("Get Response"):
+    with st.spinner("Generating response..."):
         try:
-            # Call OpenAI API (adjust for your model)
-            response = openai.Completion.create(
-                engine="text-davinci-003",  # Replace with your preferred model
-                prompt=question,
-                temperature=temperature,
-                max_tokens=max_tokens,
-            )
-            answer = response.choices[0].text.strip()
-            st.success("AI Response:")
-            st.write(answer)
+            response = chain.invoke(user_query)
+            st.success("Response:")
+            st.write(response)
         except Exception as e:
-            st.error(f"Error: {e}")
-    else:
-        st.warning("Please enter a question.")
+            st.error(f"An error occurred: {e}")
 
-# Footer
-st.sidebar.write("Built with Streamlit and OpenAI")

@@ -1,3 +1,4 @@
+import os
 import streamlit as st
 from qdrant_client import QdrantClient, models
 from sentence_transformers import SentenceTransformer
@@ -7,9 +8,12 @@ from langchain.chains import LLMChain
 
 @st.cache_data
 def api_calls():
-  groq_api_key = st.secrets["groq_api_key"]
-  qdrant_api_key = st.secrets["qdrant_api_key"]
-  qdrant_url = st.secrets["qdrant_url"]
+  groq_api_key = os.getenv('GROQ_API_KEY')
+  qdrant_api_key = os.getenv('QDRANT_API_KEY')
+  qdrant_url = os.getenv('QDRANT_URL')
+  # groq_api_key = st.secrets['groq_api_key']
+  # qdrant_api_key = st.secrets['qdrant_api_key']
+  # qdrant_url = st.secrets['qdrant_url']
 
 @st.cache_resource
 def load_models():

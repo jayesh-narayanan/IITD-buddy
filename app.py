@@ -52,8 +52,8 @@ prompt = ChatPromptTemplate.from_template(prompt_template)
 chain = LLMChain(prompt=prompt, llm=llm)
 
 # Streamlit app setup
-# st.title("Interactive Chatbot with Qdrant and Groq")
-st.write("Ask any question, and the chatbot will respond using context from the vector database!")
+st.title("IITD_buddy")
+st.write("Ask any question to your buddy!")
 
 # Input from user
 user_query = st.text_input("Enter your question here:",

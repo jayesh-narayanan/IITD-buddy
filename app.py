@@ -35,7 +35,7 @@ def custom_retriever(query, collection_name, top_k=5):
 # Define the prompt template for the assistant
 prompt_template = """
 You are an intelligent assistant designed to help IIT Delhi students by answering their queries based on the provided context.
-Keep your response concise, between 100 to 200 words, ensuring it is relevant, clear, and easy to understand.
+Keep your response concise, between 100 to 200 words, ensuring it is relevant, clear, and easy to understand. If the context is a list of lists, each list in the context is meant to contain words.
 Use the following context to respond to the user's question.
 
 Context:

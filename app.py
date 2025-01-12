@@ -1,4 +1,4 @@
-from qdrant_client import models, QdrantCllient
+from qdrant_client import models, QdrantClient
 import streamlit as st
 from langchain_core.prompts import ChatPromptTemplate
 from langchain_core.runnables import RunnablePassthrough

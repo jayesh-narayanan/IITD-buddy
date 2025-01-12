@@ -3,4 +3,3 @@ sentence_transformers
 qdrant_client
 streamlit
 langchain_groq
-os

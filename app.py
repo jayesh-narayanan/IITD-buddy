@@ -6,7 +6,7 @@ from langchain_core.output_parsers import StrOutputParser
 from sentence_transformers import SentenceTransformer
 from groq import Groq
 
-llm=Groq(api_key=st.secrets["qroq_api_key"])
+llm=Groq(api_key=st.secrets["groq_api_key"])
 qdrant_url = st.secrets["Qdrant_url"]
 qdrant_api_key = st.secrets["Qdrant_api_key"]
 client = QdrantClient(url=qdrant_url, api_key=qdrant_api_key)
@@ -63,7 +63,7 @@ chain = (
 st.title("Interactive Chatbot with Qdrant and Groq")
 st.write("Ask any question, and the chatbot will respond using context from the vector database!")
 
-user_query = st.text_input("Enter your question here:", value="What qualities did Phileas Fogg display during his journey?")
+user_query = st.text_input("Enter your question here:", value="What is the course content of mtl100")
 
 if st.button("Get Response"):
     with st.spinner("Generating response..."):

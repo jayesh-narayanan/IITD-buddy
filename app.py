@@ -7,9 +7,9 @@ from langchain.chains import LLMChain
 
 @st.cache_data
 def api_calls():
-  groq_api_key = st.secrets['groq_api_key']
-  qdrant_api_key = st.secrets['qdrant_api_key']
-  qdrant_url = st.secrets['qdrant_url']
+  groq_api_key = st.secrets["groq_api_key"]
+  qdrant_api_key = st.secrets["qdrant_api_key"]
+  qdrant_url = st.secrets["qdrant_url"]
 
 @st.cache_resource
 def load_models():

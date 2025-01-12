@@ -6,22 +6,19 @@ from langchain.prompts import ChatPromptTemplate
 from langchain.chains import LLMChain
 
 
-def api_calls():
-  groq_api_key = st.secrets['GROQ_API_KEY']
-  qdrant_api_key = st.secrets['QDRANT_API_KEY']
-  qdrant_url = st.secrets['QDRANT_URL']
 
-def load_models():
-  # Initialize the LLM model (Groq)
-  llm = ChatGroq(api_key=groq_api_key, model="llama-3.1-8b-instant")
+groq_api_key = st.secrets['GROQ_API_KEY']
+qdrant_api_key = st.secrets['QDRANT_API_KEY']
+qdrant_url = st.secrets['QDRANT_URL']
 
-  # Initialize Qdrant client
-  client = QdrantClient(url=qdrant_url, api_key=qdrant_api_key)
+# Initialize the LLM model (Groq)
+llm = ChatGroq(api_key=groq_api_key, model="llama-3.1-8b-instant")
 
-  encoder = SentenceTransformer("all-MiniLM-L6-v2")
+# Initialize Qdrant client
+client = QdrantClient(url=qdrant_url, api_key=qdrant_api_key)
 
-api_calls()
-load_models()
+encoder = SentenceTransformer("all-MiniLM-L6-v2")
+
 
 # Create a retriever for Qdrant (default: top 5 similar results)
 def custom_retriever(query, collection_name, top_k=5):

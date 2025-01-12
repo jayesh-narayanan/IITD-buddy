@@ -5,13 +5,12 @@ from langchain_groq import ChatGroq
 from langchain.prompts import ChatPromptTemplate
 from langchain.chains import LLMChain
 
-@st.cache_data
+
 def api_calls():
   groq_api_key = st.secrets['GROQ_API_KEY']
   qdrant_api_key = st.secrets['QDRANT_API_KEY']
   qdrant_url = st.secrets['QDRANT_URL']
 
-@st.cache_resource
 def load_models():
   # Initialize the LLM model (Groq)
   llm = ChatGroq(api_key=groq_api_key, model="llama-3.1-8b-instant")

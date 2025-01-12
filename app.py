@@ -1,5 +1,4 @@
 from qdrant_client import models, QdrantCllient
-from collections import Counter
 import streamlit as st
 import os
 from langchain_core.prompts import ChatPromptTemplate

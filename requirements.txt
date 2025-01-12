@@ -2,4 +2,4 @@ langchain
 sentence_transformers
 qdrant_client
 streamlit
-groq
+langchain_groq

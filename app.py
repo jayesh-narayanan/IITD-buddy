@@ -1,16 +1,14 @@
 from qdrant_client import models, QdrantCllient
 from collections import Counter
 import streamlit as st
-from langchain_groq import ChatGroq
 import os
 from langchain_core.prompts import ChatPromptTemplate
 from langchain_core.runnables import RunnablePassthrough
 from langchain_core.output_parsers import StrOutputParser
 from sentence_transformers import SentenceTransformer
+from groq import Groq
 
-llm = ChatGroq(api_key=os.getenv(st.secrets["groq_api_key"]), model="llama-3.1-8b-instant")
-
-client=QdrantCllient(url=st.secrets["Qdrant_url"],api_key=st.secrets["Qdrant_api_key"])
+llm=Groq(api_key=st.secrets["qroq_api_key"])
 
 encoder = SentenceTransformer("all-MiniLM-L6-v2")
 

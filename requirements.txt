@@ -1,5 +1,4 @@
-lang_chain_core
-lang_chain_groq
+langchain
 sentence_transformers
 qdrant_client
 collections

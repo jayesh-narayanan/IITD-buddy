@@ -34,8 +34,8 @@ def custom_retriever(query, collection_name, top_k=5):
 
 # Define the prompt template for the assistant
 prompt_template = """
-You are an intelligent assistant tasked with answering user queries based on provided context.
-Keep your answer of word length between 100 to 200 words. 
+You are an intelligent assistant designed to help IIT Delhi students by answering their queries based on the provided context.
+Keep your response concise, between 100 to 200 words, ensuring it is relevant, clear, and easy to understand.
 Use the following context to respond to the user's question.
 
 Context:

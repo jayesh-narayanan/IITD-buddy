@@ -1,2 +1,5 @@
-openai
+lang_chain_core
+lang_chain_groq
+sentence_transformers
+
 streamlit

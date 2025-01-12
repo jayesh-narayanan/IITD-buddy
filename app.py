@@ -1,6 +1,5 @@
 from qdrant_client import models, QdrantCllient
 import streamlit as st
-import os
 from langchain_core.prompts import ChatPromptTemplate
 from langchain_core.runnables import RunnablePassthrough
 from langchain_core.output_parsers import StrOutputParser
@@ -8,9 +7,10 @@ from sentence_transformers import SentenceTransformer
 from groq import Groq
 
 llm=Groq(api_key=st.secrets["qroq_api_key"])
-
+qdrant_url = st.secrets["Qdrant_url"]
+qdrant_api_key = st.secrets["Qdrant_api_key"]
+client = QdrantClient(url=qdrant_url, api_key=qdrant_api_key)
 encoder = SentenceTransformer("all-MiniLM-L6-v2")
-
 
 def custom_retriever(query, collection_name="my_books", top_k=5):
     """

@@ -1,6 +1,5 @@
 langchain
 sentence_transformers
 qdrant_client
-collections
 os
 streamlit

@@ -25,6 +25,11 @@ Pass the context to the LLM to generate concise and relevant answers.
 Display the output of the llm to the user on the app.
 Implement a user-friendly interface using Streamlit.
 
+Code Structure:
+The pdf's taken to manage the database are preprocessed by using "Preprocessing.py" file
+Then we add into our DataBase by using "DBMS.py" file
+We make the functioning our bot into a user friendly web and mobile app with the help of Stramlit.
+
 Features:
 Academics: Provide guidance on courses, degree requirements, and workload balancing.
 Mentorship: Assist students with mentorship opportunities and career planning.
